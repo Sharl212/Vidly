@@ -1,0 +1,24 @@
+﻿@model test.ViewModels.CustomersViewModel
+@{
+    ViewBag.Title = "Customers List";
+}
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Subscription</th>
+        <th scope="col">Discount Rate</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var customer in Model.Customers)
+    {
+        <tr>
+            <td>@Html.ActionLink(customer.Name, "Edit", new { id = customer.Id })</td>
+            <td>@customer.isSubscribedToNewsLetter</td>
+            <td>@customer.MembershipType.DiscountRate%</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<a href="/customers/new" class="btn btn-primary" style="color:white">New Customer</a>

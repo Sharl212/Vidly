@@ -1,0 +1,9 @@
+﻿.movieTitle, .list-group-item {
+    text-align: center;
+    font-size: 150%;
+}
+
+.card-title {
+    text-align: right;
+    color: green;
+}

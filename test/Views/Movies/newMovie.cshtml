@@ -1,0 +1,40 @@
+﻿@model test.ViewModels.NewMovieViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h1>@Model.Title</h1>
+<ul>
+    @using (Html.BeginForm("Create", "Movies"))
+    {
+        <label>Movie Name</label>
+        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Name)
+
+        <label>Release Date</label>
+        @Html.TextBoxFor(m => m.Movie.ReleaseDate, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Movie.ReleaseDate)
+
+        <label>Number In Stock</label>
+        @Html.TextBoxFor(m => m.Movie.NumberInStock, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Movie.NumberInStock)
+
+        <label>Genre</label>
+        @Html.DropDownListFor(
+            m => m.Movie.Genre_Id,
+            new SelectList(Model.Genre, "Id", "GenreType"),
+            "Select a Genre",
+            new {@class = "form-control"})
+
+        @Html.ValidationMessageFor(m => m.Movie.Genre_Id)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Movie.Id)
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+</ul>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

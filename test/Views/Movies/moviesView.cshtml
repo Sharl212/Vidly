@@ -1,0 +1,36 @@
+﻿@model test.ViewModels.MoviesViewModel
+@{
+    ViewBag.Title = "Movies List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a class="btn btn-primary" href="/movies/new">New Movie</a>
+<ul class="list-group">
+    @foreach (var movie in Model.Movies)
+    {
+        var MovieGenreId = movie.Genre_Id;
+
+        <br/>
+        <li class="list-group-item active"><strong>@movie.Name</strong></li>
+        @Html.ActionLink("Edit", "EditMovie", new { id = movie.Id }, new {@class = "btn btn-success"})
+        for (var i = 0; i < Model.Genres.Count(); i++)
+        {
+            var GenresIndex = Model.Genres[i];
+            var GenresId = GenresIndex.Id;
+            var GenresType = GenresIndex.GenreType;
+
+            if (GenresId == MovieGenreId)
+            {
+                <li class="list-group-item">
+                    <span class="card-title">Genre:</span> @GenresType
+                </li>
+            }
+        }
+        <li class="list-group-item">
+            <span class="card-title">Release Date: </span> @movie.ReleaseDate
+        </li>
+        <li class="list-group-item">
+            <span class="card-title">Number In Stock:</span> @movie.NumberInStock
+        </li>
+    }
+</ul>
